@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Coding Challenge</string>
+    <string name="loading">Loading…</string>
+    <string name="location">Location</string>
+    <string name="company">Company</string>
+    <string name="public_repos">Public Rep</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+
+    <string name="user_type">User Type: %s</string>
+    <string name="user_id">User Id: %d</string>
+    <string name="login_id">Login Id: %s</string>
+    <string name="node_id">Node Id: %s</string>
+
+    <string name="back_btn">Back Button</string>
+
+</resources>
