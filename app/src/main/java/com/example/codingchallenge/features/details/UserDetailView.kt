@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -28,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
+import com.example.codingchallenge.NavigationViewModel
 import com.example.codingchallenge.R
 import com.example.codingchallenge.features.ErrorScreen
 import com.example.codingchallenge.features.LoadingScreen
@@ -38,6 +41,7 @@ fun UserDetailScreen(
     userId: String
 ) {
     val userDetailViewModel: UserDetailViewModel = hiltViewModel()
+    val navigationViewModel = hiltViewModel<NavigationViewModel>()
     val selectedUser = userDetailViewModel.selectedUser.observeAsState(Result.Loading()).value
 
     LaunchedEffect(userId) {
@@ -88,10 +92,13 @@ fun UserDetailItemScreen(
             defaultElevation = 10.dp
         )
     ) {
+        val scrollState = rememberScrollState()
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(16.dp)
+                .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
