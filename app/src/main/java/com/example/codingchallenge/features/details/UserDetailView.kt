@@ -20,7 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,7 +30,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
-import com.example.codingchallenge.NavigationViewModel
 import com.example.codingchallenge.R
 import com.example.codingchallenge.features.ErrorScreen
 import com.example.codingchallenge.features.LoadingScreen
@@ -41,8 +40,7 @@ fun UserDetailScreen(
     userId: String
 ) {
     val userDetailViewModel: UserDetailViewModel = hiltViewModel()
-    val navigationViewModel = hiltViewModel<NavigationViewModel>()
-    val selectedUser = userDetailViewModel.selectedUser.observeAsState(Result.Loading()).value
+    val selectedUser = userDetailViewModel.selectedUser.collectAsState(Result.Loading()).value
 
     LaunchedEffect(userId) {
         userDetailViewModel.fetchUserDetails(userId)
@@ -181,8 +179,8 @@ fun IconTextRow(
 fun UserDetailItemPreview() {
     UserDetailItemScreen(
         "https://avatars.githubusercontent.com/u/1?v=4",
-        "Jonh Doe",
-        "@twitter @fb @insta",
+        "John Doe",
+        "@twitter @fb @instagram",
         "California",
         51,
         300,
@@ -195,7 +193,7 @@ fun UserDetailItemPreview() {
 fun UserDetailItemNullPreview() {
     UserDetailItemScreen(
         "https://avatars.githubusercontent.com/u/1?v=4",
-        "Jonh Doe",
+        "John Doe",
         null,
         null,
         null,
@@ -210,6 +208,6 @@ fun IconTextRowPreview() {
     IconTextRow(
         R.drawable.ic_company,
         R.string.company,
-        "@twitter @fb @insta"
+        "@twitter @fb @instagram"
     )
 }
